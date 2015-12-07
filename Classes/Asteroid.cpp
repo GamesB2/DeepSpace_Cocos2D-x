@@ -101,7 +101,6 @@ void Asteroid::update(float deltaTime)
 		Reset();
 		_outsideScreen = false;
 	}
-	
 }
 
 void Asteroid::CheckOutsideScreen()

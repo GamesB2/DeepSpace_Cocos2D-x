@@ -103,6 +103,8 @@ void HelloWorld::update(float delta)
 	{
 
 	}
+
+	
 }
 
 bool HelloWorld::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
