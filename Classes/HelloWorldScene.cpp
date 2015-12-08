@@ -10,6 +10,7 @@
 USING_NS_CC;
 
 Asteroid* asteroids[4];
+game_player* _player;
 
 using namespace cocostudio::timeline;
 
@@ -57,7 +58,9 @@ bool HelloWorld::init()
 
 	//	game_player obj;
 	// init here
-	game_Ship = (Sprite*)rootNode->getChildByName("game_Ship");
+	_player = new game_player();
+	addChild(_player);
+
 	invisibleTarget = (Sprite*)rootNode->getChildByName("invisibleTarget");
 
 	visibleTarget = (Sprite*)rootNode->getChildByName("visibleTarget");
@@ -79,6 +82,8 @@ bool HelloWorld::init()
 
 	startButton = static_cast<ui::Button*>(rootNode->getChildByName("temp_Go"));
 	
+	_gameStart = false;
+
 	this->scheduleUpdate();
 	
     return true;
@@ -86,40 +91,38 @@ bool HelloWorld::init()
 
 void HelloWorld::update(float delta)
 {
-	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 4; j++) {
-			if (j != i) {
-				if (asteroids[i]->HasCollidedWithAsteroid(asteroids[j]->GetBoundingBox()))
+	if (GameManager::sharedGameManager()->isGameLive)
+	{
+		for (int i = 0; i < 4; i++) 
+		{
+			for (int j = 0; j < 4; j++) 
+			{
+				if (j != i) 
 				{
-					asteroids[i]->AsteroidBounce(asteroids[j]->GetVec(), asteroids[j]->GetPos());
-					asteroids[j]->AsteroidBounce(asteroids[i]->GetVec(), asteroids[i]->GetPos());
+					if (asteroids[i]->HasCollidedWithAsteroid(asteroids[j]->GetBoundingBox()))
+					{
+						asteroids[i]->AsteroidBounce(asteroids[j]->GetVec(), asteroids[j]->GetPos());
+						asteroids[j]->AsteroidBounce(asteroids[i]->GetVec(), asteroids[i]->GetPos());
+					}
 				}
 			}
 		}
+
+		
 	}
-
-	game_Ship->setPosition((HelloWorld::game_Ship->getPosition() + trajectory));
-	if (GameManager::sharedGameManager()->isGameLive)
-	{
-
-	}
-
 	
 }
 
 bool HelloWorld::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 {
+	GameManager::sharedGameManager()->isGameLive = true;
 	invisibleTarget->setPosition(touch->getLocation());
 	//	if (obj->withinBoundingBox( game_Ship, invisibleTarget) )
 	{
 		targetingOnline = true;
 	}
 
-	Vec2 touchPaths = touch->getLocation();
-
-	trajectory = (Vec2(touchPaths - game_Ship->getPosition()));
-
-	trajectory.normalize();
+	_player->SetTrajectory(touch->getLocation());
 
 	return true;
 }

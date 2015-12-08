@@ -11,6 +11,7 @@
         <Image Name="invisibleTarget.png" />
         <Image Name="visibleTarget.png" />
         <Image Name="PlayerShip.png" />
+        <Project Name="PlayerNode.csd" Type="Node" />
       </RootFolder>
     </Group>
   </SolutionFolder>

@@ -5,6 +5,7 @@
 #include "cocos2d.h"
 #include <stdio.h>
 #include "HelloWorldScene.h"
+#include "GameManager.h"
 
 class game_player : public cocos2d::Node
 {
@@ -31,7 +32,8 @@ private:
 	float _currentSpeed;
 	cocos2d::Vec2 _endPoint;
 	float _maxSpeed;
-
+	bool _dead;
+	cocos2d::Size _winSize;
 	//maybe if time
 	//bool _rotationComplete;
 	

@@ -37,6 +37,7 @@ private:
 	cocos2d::Sprite*        visibleTarget;
 	cocos2d::ui::Button*    startButton;
 	bool targetingOnline;
+	bool _gameStart;
 };
 
 #endif // __HELLOWORLD_SCENE_H__
