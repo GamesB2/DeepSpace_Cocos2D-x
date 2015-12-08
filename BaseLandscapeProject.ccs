@@ -9,8 +9,8 @@
         <Image Name="Asteroid.png" />
         <Image Name="Asteroids_32x32_003.png" />
         <Image Name="invisibleTarget.png" />
-        <Image Name="PlayerShip.png" />
         <Image Name="visibleTarget.png" />
+        <Image Name="PlayerShip.png" />
       </RootFolder>
     </Group>
   </SolutionFolder>

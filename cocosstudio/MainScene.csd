@@ -27,17 +27,6 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="Normal" Path="Asteroid.csd" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="game_Ship" ActionTag="305584253" Tag="8" IconVisible="False" LeftMargin="436.0000" RightMargin="444.0000" TopMargin="282.0000" BottomMargin="258.0000" ctype="SpriteObjectData">
-            <Size X="80.0000" Y="100.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="476.0000" Y="308.0000" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.4958" Y="0.4812" />
-            <PreSize X="0.0000" Y="0.0000" />
-            <FileData Type="Normal" Path="PlayerShip.png" Plist="" />
-            <BlendFunc Src="770" Dst="771" />
-          </AbstractNodeData>
           <AbstractNodeData Name="visibleTarget" ActionTag="1594712049" Tag="9" IconVisible="False" LeftMargin="442.5000" RightMargin="446.5000" TopMargin="160.0000" BottomMargin="412.0000" ctype="SpriteObjectData">
             <Size X="71.0000" Y="68.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -74,6 +63,17 @@
             <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="game_Ship" ActionTag="-125376846" Tag="11" IconVisible="False" LeftMargin="446.0000" RightMargin="454.0000" TopMargin="288.5000" BottomMargin="264.5000" ctype="SpriteObjectData">
+            <Size X="60.0000" Y="87.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="476.0000" Y="308.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.4958" Y="0.4812" />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FileData Type="Normal" Path="PlayerShip.png" Plist="" />
+            <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

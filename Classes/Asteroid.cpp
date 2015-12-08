@@ -117,6 +117,7 @@ void Asteroid::CheckOutsideScreen()
 
 void Asteroid::Reset()
 {
+	_rotation = 0;
 	_sprite->setPosition(CreateStartPoint());
 }
 
@@ -198,7 +199,6 @@ void Asteroid::AsteroidBounce(Vec2 bounceVector, Vec2 collisionPos)
 	float optimizedP = (2.0 * (a1 - a2)) / 2;
 
 	_trajectory = _trajectory - optimizedP * n;
-	_sprite->setPosition(_currentPoint + (_trajectory * 10));
 }
 
 Vec2 Asteroid::GetVec()
