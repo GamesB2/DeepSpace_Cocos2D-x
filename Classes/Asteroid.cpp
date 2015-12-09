@@ -82,24 +82,27 @@ void Asteroid::update(float deltaTime)
 {
 	if (GameManager::sharedGameManager()->isGameLive)
 	{
-		_currentPoint = Vec2(_sprite->getPositionX(), _sprite->getPositionY());
-
-		_sprite->setPosition(_currentPoint + (_trajectory * _speed) * deltaTime);
-
-		_rotation = _rotation + 1;
-
-		_sprite->setRotation(_rotation);
-
-		_asteroidRect->origin = convertToWorldSpaceAR(_sprite->getBoundingBox().origin);
-
-		if (_rotation == 360)
+		if (GameManager::sharedGameManager()->_died != true)
 		{
-			_rotation = 0;
-		}
+			_currentPoint = Vec2(_sprite->getPositionX(), _sprite->getPositionY());
 
-		if (CheckOutsideScreen() == true)
-		{
-			Reset();
+			_sprite->setPosition(_currentPoint + (_trajectory * _speed) * deltaTime);
+
+			_rotation = _rotation + 1;
+
+			_sprite->setRotation(_rotation);
+
+			_asteroidRect->origin = convertToWorldSpaceAR(_sprite->getBoundingBox().origin);
+
+			if (_rotation == 360)
+			{
+				_rotation = 0;
+			}
+
+			if (CheckOutsideScreen() == true)
+			{
+				Reset();
+			}
 		}
 	}
 }

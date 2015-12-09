@@ -54,13 +54,12 @@ bool game_player::init()
 
 	game_Ship->setPosition(_winSize.width / 2, _winSize.height / 2);
 	_currentSpeed = 0.0f;
-	_maxSpeed = 60.0f;
+	_maxSpeed = 75.0f;
 	_currentPosition = game_Ship->getPosition();
 	_endPoint = Vec2(-1.0f, -1.0f);
 	_endpointReached = true;
 	_rotation = 0;
 	_trajectory = Vec2(0, 0);
-	_dead = false;
 
 	return true;
 }
@@ -69,9 +68,9 @@ void game_player::update (float deltaTime)
 {
 	if (GameManager::sharedGameManager()->isGameLive)
 	{
-		if (_dead == false)
+		if (GameManager::sharedGameManager()->_died != true)
 		{
-			if (_endPoint != Vec2(-1.0f,1.0f))
+			if (_endPoint != Vec2(-1.0f,-1.0f))
 			{
 				if (!_endpointReached)
 				{
@@ -108,6 +107,8 @@ game_player::~game_player()
 
 bool game_player::asteroidCollision(cocos2d::Rect collisionBoxtoCheck)
 {
+	convertToWorldSpaceAR(game_Ship->getBoundingBox().origin);
+
 	if (game_Ship->getBoundingBox().intersectsRect(collisionBoxtoCheck))
 	{
 		return true;
@@ -124,19 +125,18 @@ void game_player::reset()
 	_currentSpeed = 0.0f;
 	_maxSpeed = 60.0f;
 	_currentPosition = game_Ship->getPosition();
-	_endPoint = nullptr;
+	_endPoint = Vec2(-1.0f, -1.0f);
 	_endpointReached = true;
 	_rotation = 0;
-	_trajectory = (0, 0);
-	_dead = false;
+	_trajectory = Vec2(0, 0);
 }
 
 void game_player::SetTrajectory(cocos2d::Vec2 touchPoint)
 {
 	_endPoint = touchPoint;
 	_trajectory = (_endPoint - _currentPosition);
-	_rotation = CCPoint::dot(_currentPosition, _trajectory);
-	game_Ship->setRotation(_rotation);
 	_trajectory.normalize();
+	_rotation = (-((_trajectory.getAngle())*(180 / 3.14159265))) + 90;
+	game_Ship->setRotation(_rotation);
 	_endpointReached = false;
 }

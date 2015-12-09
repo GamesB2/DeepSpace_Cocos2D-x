@@ -4,14 +4,13 @@
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
         <Project Name="MainScene.csd" Type="Scene" />
-        <Image Name="HelloWorld.png" />
         <Project Name="Asteroid.csd" Type="Node" />
-        <Image Name="Asteroid.png" />
         <Image Name="Asteroids_32x32_003.png" />
-        <Image Name="invisibleTarget.png" />
-        <Image Name="visibleTarget.png" />
         <Image Name="PlayerShip.png" />
         <Project Name="PlayerNode.csd" Type="Node" />
+        <Image Name="paternus1.png" />
+        <Image Name="HelloWorld.png" />
+        <Image Name="DeepSpace.png" />
       </RootFolder>
     </Group>
   </SolutionFolder>

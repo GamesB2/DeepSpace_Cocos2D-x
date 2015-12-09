@@ -32,7 +32,6 @@ private:
 	float _currentSpeed;
 	cocos2d::Vec2 _endPoint;
 	float _maxSpeed;
-	bool _dead;
 	cocos2d::Size _winSize;
 	//maybe if time
 	//bool _rotationComplete;
