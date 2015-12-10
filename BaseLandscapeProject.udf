@@ -33,6 +33,7 @@
         <OpenedDocuments>
           <FilePathData Path="Asteroid.csd" />
           <FilePathData Path="MainScene.csd" />
+          <FilePathData Path="PlayerNode.csd" />
         </OpenedDocuments>
         <ActiveDocument Path="MainScene.csd" />
       </Value>

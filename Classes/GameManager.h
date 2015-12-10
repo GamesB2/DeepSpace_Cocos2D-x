@@ -1,9 +1,3 @@
-//
-//  GameManager.h
-// SSSGI11
-//  Ben Johnson
-//
-//
 
 #ifndef GameManager_h
 #define GameManager_h
@@ -27,6 +21,7 @@ public:
     
     //Accessible variable
     bool isGameLive;
+	bool _died;
    
 //-------------------------------------------------------------------------
 private:

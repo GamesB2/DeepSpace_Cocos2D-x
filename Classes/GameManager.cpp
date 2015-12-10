@@ -1,14 +1,5 @@
-//
-//  GameManager.cpp
-//  FlappyBird
-//
-//  Created by Paul Roberts on 28/09/2015.
-//
-//
-
 #include "GameManager.h"
 
-//Set the instance to be null.
 GameManager* GameManager::instance = NULL;
 
 //-------------------------------------------------------------------------

@@ -6,6 +6,10 @@ USING_NS_CC;
 using namespace cocos2d;
 //////////////////////
 
+game_player::game_player()
+{
+	this->init();
+}
 
 game_player* game_player::create()
 {
@@ -33,64 +37,106 @@ bool game_player::init()
 	}
 
 	//Load this object in from cocos studio.
-	auto rootNode = CSLoader::createNode("Pipe.csb");
+	auto rootNode = CSLoader::createNode("PlayerNode.csb");
 	addChild(rootNode);
 
 	//Position this container at left,centre. Anchor point should also be (0.0f, 0.5f).
 	auto winSize = Director::getInstance()->getVisibleSize();
-	this->setPosition(Vec2(0.0f, winSize.height*0.5f));
-	this->setAnchorPoint(Vec2(0.0f, 0.5f));
+	this->setPosition(Vec2(0.0f, 0.0f));
+	this->setAnchorPoint(Vec2(winSize.width/2, winSize.height/2));
 	this->scheduleUpdate();
 
+	_winSize = winSize;
 
-	//Set references to the Sprite objects (pipes)
-	game_Ship = (Sprite*)rootNode->getChildByName("game_Ship");
-	//bottomPipe = (Sprite*)rootNode->getChildByName("bottompipe");
+	//Set references to the Sprite objects 
+	game_Ship = Sprite::create("PlayerShip.png");
+	rootNode->addChild(game_Ship);
 
-	//Set the start positions.
-
-	//Speed of ship at initialisation
-	currentSpeed = 0.0f;
+	game_Ship->setPosition(_winSize.width / 2, _winSize.height / 2);
+	_currentSpeed = 0.0f;
+	_maxSpeed = 75.0f;
+	_currentPosition = game_Ship->getPosition();
+	_endPoint = Vec2(-1.0f, -1.0f);
+	_endpointReached = true;
+	_rotation = 0;
+	_trajectory = Vec2(0, 0);
 
 	return true;
 }
 
-void game_player::update (float updateTime)
+void game_player::update (float deltaTime)
 {
-	
-}
+	if (GameManager::sharedGameManager()->isGameLive)
+	{
+		if (GameManager::sharedGameManager()->_died != true)
+		{
+			if (_endPoint != Vec2(-1.0f,-1.0f))
+			{
+				if (!_endpointReached)
+				{
+					_currentSpeed = _currentSpeed + 1;
+					if (_currentSpeed >= _maxSpeed)
+					{
+						_currentSpeed = _maxSpeed;
+					}
+				}
+				else if (_endpointReached)
+				{
+					_currentSpeed = _currentSpeed - 1;
+					if (_currentSpeed <= 0)
+					{
+						_currentSpeed = 0;
+					}
+				}
+				_currentPosition = game_Ship->getPosition();
+				game_Ship->setPosition(_currentPosition + (_trajectory * _currentSpeed) * deltaTime);
 
-//-------------------------------------------------------------------------
-game_player::game_player()
-{
+				if (game_Ship->getBoundingBox().containsPoint(_endPoint))
+				{
+					_endpointReached = true;
+				}
+			}
+		}
+	}
 }
-
-//-------------------------------------------------------------------------
 
 game_player::~game_player()
 {
 
-}////-----------------------------------------------------------------------
+}
 
-
-
-
-//-------------------------------------------------------------------------
-
-/*bool game_player::withinBoundingBox( Sprite* ship, Sprite* target)
+bool game_player::asteroidCollision(cocos2d::Rect collisionBoxtoCheck)
 {
-	Rect spaceshipSize;
-	spaceshipSize.size = ship->getBoundingBox().size;
-	spaceshipSize.origin = convertToWorldSpaceAR(ship->getBoundingBox().origin);
-	Rect targetTrack;
-	targetTrack.size = target->getBoundingBox().size;
-	targetTrack.origin = convertToWorldSpaceAR(target->getBoundingBox().origin);
+	convertToWorldSpaceAR(game_Ship->getBoundingBox().origin);
 
-
-	if (spaceshipSize.intersectsRect(targetTrack))
-	{ 
-		return true;}
-
+	if (game_Ship->getBoundingBox().intersectsRect(collisionBoxtoCheck))
+	{
+		return true;
+	}
 	else
+	{
 		return false;
-}*/
+	}
+}
+
+void game_player::reset()
+{
+	game_Ship->setPosition(_winSize.width / 2, _winSize.height / 2);
+	_currentSpeed = 0.0f;
+	_maxSpeed = 60.0f;
+	_currentPosition = game_Ship->getPosition();
+	_endPoint = Vec2(-1.0f, -1.0f);
+	_endpointReached = true;
+	_rotation = 0;
+	_trajectory = Vec2(0, 0);
+}
+
+void game_player::SetTrajectory(cocos2d::Vec2 touchPoint)
+{
+	_endPoint = touchPoint;
+	_trajectory = (_endPoint - _currentPosition);
+	_trajectory.normalize();
+	_rotation = (-((_trajectory.getAngle())*(180 / 3.14159265))) + 90;
+	game_Ship->setRotation(_rotation);
+	_endpointReached = false;
+}

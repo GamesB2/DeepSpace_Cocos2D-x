@@ -25,6 +25,9 @@ public:
 	virtual void onTouchMoved(cocos2d::Touch*, cocos2d::Event*);
 	virtual void onTouchCancelled(cocos2d::Touch*, cocos2d::Event*);
 
+	void StartGame();
+	void SetUpbuttons();
+
 	cocos2d::Sprite*        game_Ship;
 	cocos2d::Vec2			trajectory;
 
@@ -36,7 +39,8 @@ private:
 
 	cocos2d::Sprite*        visibleTarget;
 	cocos2d::ui::Button*    startButton;
-	bool targetingOnline;
+	cocos2d::ui::Button*    exitButton;
+	cocos2d::Sprite*		Title;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

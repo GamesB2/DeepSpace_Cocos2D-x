@@ -9,7 +9,8 @@
 
 USING_NS_CC;
 
-Asteroid* asteroids[4];
+Asteroid* asteroids[5];
+game_player* _player;
 
 using namespace cocostudio::timeline;
 
@@ -49,7 +50,7 @@ bool HelloWorld::init()
 
 
 	// Init Asteroids
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		asteroids[i] = new Asteroid(i);
 		addChild(asteroids[i]);
@@ -57,11 +58,13 @@ bool HelloWorld::init()
 
 	//	game_player obj;
 	// init here
-	game_Ship = (Sprite*)rootNode->getChildByName("game_Ship");
-	invisibleTarget = (Sprite*)rootNode->getChildByName("invisibleTarget");
+	_player = new game_player();
+	addChild(_player);
 
 	visibleTarget = (Sprite*)rootNode->getChildByName("visibleTarget");
+	visibleTarget->setOpacity(0);
 
+	Title = (Sprite*)rootNode->getChildByName("Title");
 
 	// Create a custom event listener
 	auto touchListener = EventListenerTouchOneByOne::create();
@@ -76,9 +79,17 @@ bool HelloWorld::init()
 	// Add the event listener to the event dispatcher
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
 
-
 	startButton = static_cast<ui::Button*>(rootNode->getChildByName("temp_Go"));
+	startButton->setTitleText("Start Game!");
+
+	exitButton = static_cast<ui::Button*>(rootNode->getChildByName("Exit"));
+	exitButton->setTitleText("Exit Game");
+
+	SetUpbuttons();
 	
+	GameManager::sharedGameManager()->_died = false;
+	GameManager::sharedGameManager()->isGameLive = false;
+
 	this->scheduleUpdate();
 	
     return true;
@@ -86,57 +97,131 @@ bool HelloWorld::init()
 
 void HelloWorld::update(float delta)
 {
-	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 4; j++) {
-			if (j != i) {
-				if (asteroids[i]->HasCollidedWithAsteroid(asteroids[j]->GetBoundingBox()))
+	if (GameManager::sharedGameManager()->isGameLive)
+	{
+		Title->setVisible(false);
+		if (GameManager::sharedGameManager()->_died != true)
+		{
+			for (int i = 0; i < 5; i++)
+			{
+				for (int j = 0; j < 5; j++)
 				{
-					asteroids[i]->AsteroidBounce(asteroids[j]->GetVec(), asteroids[j]->GetPos());
-					asteroids[j]->AsteroidBounce(asteroids[i]->GetVec(), asteroids[i]->GetPos());
+					if (j != i)
+					{
+						if (asteroids[i]->HasCollidedWithAsteroid(asteroids[j]->GetBoundingBox()))
+						{
+							asteroids[i]->AsteroidBounce(asteroids[j]->GetVec(), asteroids[j]->GetPos());
+							asteroids[j]->AsteroidBounce(asteroids[i]->GetVec(), asteroids[i]->GetPos());
+						}
+					}
+				}
+				if (_player->asteroidCollision(*asteroids[i]->GetBoundingBox()))
+				{
+					GameManager::sharedGameManager()->_died = true;
+					SetUpbuttons();
 				}
 			}
 		}
+		else
+		{
+		
+		}
+		if (visibleTarget->getOpacity() > 0)
+		{
+			visibleTarget->setOpacity(visibleTarget->getOpacity() - 3);
+			visibleTarget->setRotation(visibleTarget->getRotation() + 3);
+		}
+
 	}
-
-	game_Ship->setPosition((HelloWorld::game_Ship->getPosition() + trajectory));
-	if (GameManager::sharedGameManager()->isGameLive)
-	{
-
-	}
-
-	
 }
 
 bool HelloWorld::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 {
-	invisibleTarget->setPosition(touch->getLocation());
-	//	if (obj->withinBoundingBox( game_Ship, invisibleTarget) )
+	if (GameManager::sharedGameManager()->isGameLive == true)
 	{
-		targetingOnline = true;
+		if (GameManager::sharedGameManager()->_died != true)
+		{
+			_player->SetTrajectory(touch->getLocation());
+
+			visibleTarget->setPosition(touch->getLocation());
+			visibleTarget->setOpacity(255);
+		}
 	}
-
-	Vec2 touchPaths = touch->getLocation();
-
-	trajectory = (Vec2(touchPaths - game_Ship->getPosition()));
-
-	trajectory.normalize();
-
 	return true;
 }
 
 void HelloWorld::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
 {
-	targetingOnline = false;
+	if (GameManager::sharedGameManager()->isGameLive == true)
+	{
+		if (GameManager::sharedGameManager()->_died != true)
+		{
+			_player->SetTrajectory(touch->getLocation());
+
+			visibleTarget->setPosition(touch->getLocation());
+			visibleTarget->setOpacity(255);
+		}
+	}
 }
 
 void HelloWorld::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event)
 {
-	if (targetingOnline){
-		visibleTarget->setPosition(touch->getLocation());
-	}
+	
 }
 
 void HelloWorld::onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* event)
 {
 
+}
+void HelloWorld::StartGame()
+{
+	for (int i = 0; i < 5; i++)
+	{
+		asteroids[i]->Reset();
+	}
+	_player->reset();
+}
+void HelloWorld::SetUpbuttons()
+{
+	Title->setVisible(true);
+
+	startButton->setVisible(true);
+	startButton->addTouchEventListener([&](Ref* sender, cocos2d::ui::Widget::TouchEventType type)
+	{
+		switch (type)
+		{
+		case ui::Widget::TouchEventType::BEGAN:
+			startButton->setVisible(false);
+			exitButton->setVisible(false);
+			GameManager::sharedGameManager()->isGameLive = true;
+			GameManager::sharedGameManager()->_died = false;
+			StartGame();
+			break;
+		case ui::Widget::TouchEventType::ENDED:
+			break;
+		case ui::Widget::TouchEventType::CANCELED:
+			break;
+		case ui::Widget::TouchEventType::MOVED:
+			break;
+		}
+	}
+	);
+
+	exitButton->setVisible(true);
+	exitButton->addTouchEventListener([&](Ref* sender, cocos2d::ui::Widget::TouchEventType type)
+	{
+		switch (type)
+		{
+		case ui::Widget::TouchEventType::BEGAN:
+			Director::getInstance()->end();
+			break;
+		case ui::Widget::TouchEventType::ENDED:
+			break;
+		case ui::Widget::TouchEventType::CANCELED:
+			break;
+		case ui::Widget::TouchEventType::MOVED:
+			break;
+		}
+	}
+	);
 }

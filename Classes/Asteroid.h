@@ -16,7 +16,7 @@ public:
 	virtual void update(float);
 
 	// Collision Detection
-	void CheckOutsideScreen();
+	bool CheckOutsideScreen();
 	bool HasCollidedWithAsteroid(cocos2d::Rect* collisionBoxToCheck);
 
 	// Movement
@@ -31,7 +31,6 @@ public:
 
 private:
 	// Asteroid Variables
-	bool  _outsideScreen;
 	float _rotation;
 	float _speed;
 	int   _randStart;

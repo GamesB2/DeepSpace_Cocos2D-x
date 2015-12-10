@@ -73,45 +73,53 @@ bool Asteroid::init()
 
 	_speed = 150;
 	_rotation = 0;
+
 	return true;
 
 }
 
 void Asteroid::update(float deltaTime)
 {
-	_currentPoint = Vec2(_sprite->getPositionX(), _sprite->getPositionY());
-
-	_sprite->setPosition(_currentPoint + (_trajectory * _speed) * deltaTime);
-
-	CheckOutsideScreen();
-
-	_rotation = _rotation + 1;
-
-	_sprite->setRotation(_rotation);
-
-	_asteroidRect->origin = convertToWorldSpaceAR(_sprite->getBoundingBox().origin);
-	
-	if (_rotation == 360)
+	if (GameManager::sharedGameManager()->isGameLive)
 	{
-		_rotation = 0;
-	}
+		if (GameManager::sharedGameManager()->_died != true)
+		{
+			_currentPoint = Vec2(_sprite->getPositionX(), _sprite->getPositionY());
 
-	if (_outsideScreen == true)
-	{
-		Reset();
-		_outsideScreen = false;
+			_sprite->setPosition(_currentPoint + (_trajectory * _speed) * deltaTime);
+
+			_rotation = _rotation + 1;
+
+			_sprite->setRotation(_rotation);
+
+			_asteroidRect->origin = convertToWorldSpaceAR(_sprite->getBoundingBox().origin);
+
+			if (_rotation == 360)
+			{
+				_rotation = 0;
+			}
+
+			if (CheckOutsideScreen() == true)
+			{
+				Reset();
+			}
+		}
 	}
 }
 
-void Asteroid::CheckOutsideScreen()
+bool Asteroid::CheckOutsideScreen()
 {
 	if (_sprite->getPositionX() > (_winSize.width + 80.0f) || _sprite->getPositionY() > (_winSize.height + 80.0f))
 	{
-		_outsideScreen = true;
+		return true;
 	}
 	if (_sprite->getPositionY() < -80.0f || (_sprite->getPositionX() < -80.0f))
 	{
-		_outsideScreen = true;
+		return true;
+	}
+	else
+	{
+		return false;
 	}
 }
 
