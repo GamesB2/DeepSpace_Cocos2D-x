@@ -34,8 +34,9 @@
           <FilePathData Path="Asteroid.csd" />
           <FilePathData Path="MainScene.csd" />
           <FilePathData Path="PlayerNode.csd" />
+          <FilePathData Path="Credits.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="MainScene.csd" />
+        <ActiveDocument Path="Credits.csd" />
       </Value>
     </Item>
   </Properties>

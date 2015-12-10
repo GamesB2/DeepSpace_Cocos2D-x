@@ -6,6 +6,8 @@
 #include "game_player.h"
 #include "GameManager.h"
 #include "ui/CocosGUI.h"
+#include "Credits.h"
+#include "SimpleAudioEngine.h"
 
 class HelloWorld : public cocos2d::Layer
 {
@@ -40,7 +42,9 @@ private:
 	cocos2d::Sprite*        visibleTarget;
 	cocos2d::ui::Button*    startButton;
 	cocos2d::ui::Button*    exitButton;
+	cocos2d::ui::Button*    creditsButton;
 	cocos2d::Sprite*		Title;
+	CocosDenshion::SimpleAudioEngine* audio;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

@@ -66,6 +66,10 @@ bool HelloWorld::init()
 
 	Title = (Sprite*)rootNode->getChildByName("Title");
 
+	//Preload Music
+	audio = CocosDenshion::SimpleAudioEngine::getInstance();
+	audio->preloadBackgroundMusic("DiscoCentury.wav");
+
 	// Create a custom event listener
 	auto touchListener = EventListenerTouchOneByOne::create();
 
@@ -85,6 +89,9 @@ bool HelloWorld::init()
 	exitButton = static_cast<ui::Button*>(rootNode->getChildByName("Exit"));
 	exitButton->setTitleText("Exit Game");
 
+	creditsButton = static_cast<ui::Button*>(rootNode->getChildByName("Credits"));
+	creditsButton->setTitleText("Credits");
+
 	SetUpbuttons();
 	
 	GameManager::sharedGameManager()->_died = false;
@@ -99,11 +106,21 @@ void HelloWorld::update(float delta)
 {
 	if (GameManager::sharedGameManager()->isGameLive)
 	{
-		Title->setVisible(false);
 		if (GameManager::sharedGameManager()->_died != true)
 		{
+			if (visibleTarget->getOpacity() > 0)
+			{
+				visibleTarget->setOpacity(visibleTarget->getOpacity() - 3);
+				visibleTarget->setRotation(visibleTarget->getRotation() + 3);
+			}
+
 			for (int i = 0; i < 5; i++)
 			{
+				if (_player->asteroidCollision(*asteroids[i]->GetBoundingBox()))
+				{
+					GameManager::sharedGameManager()->_died = true;
+					SetUpbuttons();
+				}
 				for (int j = 0; j < 5; j++)
 				{
 					if (j != i)
@@ -115,23 +132,8 @@ void HelloWorld::update(float delta)
 						}
 					}
 				}
-				if (_player->asteroidCollision(*asteroids[i]->GetBoundingBox()))
-				{
-					GameManager::sharedGameManager()->_died = true;
-					SetUpbuttons();
-				}
 			}
 		}
-		else
-		{
-		
-		}
-		if (visibleTarget->getOpacity() > 0)
-		{
-			visibleTarget->setOpacity(visibleTarget->getOpacity() - 3);
-			visibleTarget->setRotation(visibleTarget->getRotation() + 3);
-		}
-
 	}
 }
 
@@ -175,6 +177,8 @@ void HelloWorld::onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* event)
 }
 void HelloWorld::StartGame()
 {
+	audio->rewindBackgroundMusic();
+	audio->playBackgroundMusic("DiscoCentury.wav", true);
 	for (int i = 0; i < 5; i++)
 	{
 		asteroids[i]->Reset();
@@ -183,7 +187,16 @@ void HelloWorld::StartGame()
 }
 void HelloWorld::SetUpbuttons()
 {
+	audio->pauseBackgroundMusic();
+	
 	Title->setVisible(true);
+
+	_player->setVisible(false);
+
+	for (int i = 0; i < 5; i++)
+	{
+		asteroids[i]->setVisible(false);
+	}
 
 	startButton->setVisible(true);
 	startButton->addTouchEventListener([&](Ref* sender, cocos2d::ui::Widget::TouchEventType type)
@@ -191,11 +204,18 @@ void HelloWorld::SetUpbuttons()
 		switch (type)
 		{
 		case ui::Widget::TouchEventType::BEGAN:
+			Title->setVisible(false);
 			startButton->setVisible(false);
 			exitButton->setVisible(false);
+			creditsButton->setVisible(false);
+			_player->setVisible(true);
+			for (int i = 0; i < 5; i++)
+			{
+				asteroids[i]->setVisible(true);
+			}
+			StartGame();
 			GameManager::sharedGameManager()->isGameLive = true;
 			GameManager::sharedGameManager()->_died = false;
-			StartGame();
 			break;
 		case ui::Widget::TouchEventType::ENDED:
 			break;
@@ -214,6 +234,24 @@ void HelloWorld::SetUpbuttons()
 		{
 		case ui::Widget::TouchEventType::BEGAN:
 			Director::getInstance()->end();
+			break;
+		case ui::Widget::TouchEventType::ENDED:
+			break;
+		case ui::Widget::TouchEventType::CANCELED:
+			break;
+		case ui::Widget::TouchEventType::MOVED:
+			break;
+		}
+	}
+	);
+
+	creditsButton->setVisible(true);
+	creditsButton->addTouchEventListener([&](Ref* sender, cocos2d::ui::Widget::TouchEventType type)
+	{
+		switch (type)
+		{
+		case ui::Widget::TouchEventType::BEGAN:
+			Director::getInstance()->pushScene(Credits::createScene());
 			break;
 		case ui::Widget::TouchEventType::ENDED:
 			break;

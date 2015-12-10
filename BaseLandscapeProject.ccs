@@ -11,6 +11,7 @@
         <Image Name="paternus1.png" />
         <Image Name="HelloWorld.png" />
         <Image Name="DeepSpace.png" />
+        <Project Name="Credits.csd" Type="Scene" />
       </RootFolder>
     </Group>
   </SolutionFolder>
