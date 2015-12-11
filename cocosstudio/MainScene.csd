@@ -94,6 +94,26 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
+          <AbstractNodeData Name="Timer" ActionTag="2107424558" Tag="22" IconVisible="True" LeftMargin="308.0000" RightMargin="652.0000" TopMargin="394.0000" BottomMargin="246.0000" ctype="SingleNodeObjectData">
+            <Size X="0.0000" Y="0.0000" />
+            <AnchorPoint />
+            <Position X="308.0000" Y="246.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.3208" Y="0.3844" />
+            <PreSize X="0.0000" Y="0.0000" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="Timer" ActionTag="-1357147429" Tag="23" IconVisible="False" LeftMargin="821.2927" RightMargin="48.7073" TopMargin="23.7220" BottomMargin="593.2780" FontSize="20" LabelText="Text Label" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="90.0000" Y="23.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="866.2927" Y="604.7780" />
+            <Scale ScaleX="1.0544" ScaleY="2.0653" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.9024" Y="0.9450" />
+            <PreSize X="0.0000" Y="0.0000" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>

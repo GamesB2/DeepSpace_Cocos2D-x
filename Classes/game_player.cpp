@@ -44,7 +44,7 @@ bool game_player::init()
 	auto winSize = Director::getInstance()->getVisibleSize();
 	this->setPosition(Vec2(0.0f, 0.0f));
 	this->setAnchorPoint(Vec2(winSize.width/2, winSize.height/2));
-	this->scheduleUpdate();
+	//this->scheduleUpdate();
 
 	_winSize = winSize;
 
@@ -54,7 +54,7 @@ bool game_player::init()
 
 	game_Ship->setPosition(_winSize.width / 2, _winSize.height / 2);
 	_currentSpeed = 0.0f;
-	_maxSpeed = 75.0f;
+	_maxSpeed = 90.0f;
 	_currentPosition = game_Ship->getPosition();
 	_endPoint = Vec2(-1.0f, -1.0f);
 	_endpointReached = true;
@@ -95,6 +95,7 @@ void game_player::update (float deltaTime)
 				{
 					_endpointReached = true;
 				}
+				convertToWorldSpaceAR(game_Ship->getBoundingBox().origin);
 			}
 		}
 	}
@@ -107,7 +108,6 @@ game_player::~game_player()
 
 bool game_player::asteroidCollision(cocos2d::Rect collisionBoxtoCheck)
 {
-	convertToWorldSpaceAR(game_Ship->getBoundingBox().origin);
 
 	if (game_Ship->getBoundingBox().intersectsRect(collisionBoxtoCheck))
 	{

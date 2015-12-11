@@ -60,7 +60,7 @@ bool Asteroid::init()
 	
 	this->setPosition(0.0,0.0);
 	this->setAnchorPoint(Vec2(_winSize.width/2, _winSize.height/2));
-	this->scheduleUpdate();
+	//this->scheduleUpdate();
 
 	_sprite = Sprite::create("Asteroids_32x32_003.png");
 	_rootNode->addChild(_sprite);

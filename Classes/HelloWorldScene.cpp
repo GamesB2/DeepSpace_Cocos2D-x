@@ -84,10 +84,10 @@ bool HelloWorld::init()
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
 
 	startButton = static_cast<ui::Button*>(rootNode->getChildByName("temp_Go"));
-	startButton->setTitleText("Start Game!");
+	startButton->setTitleText("Start!");
 
 	exitButton = static_cast<ui::Button*>(rootNode->getChildByName("Exit"));
-	exitButton->setTitleText("Exit Game");
+	exitButton->setTitleText("Exit");
 
 	creditsButton = static_cast<ui::Button*>(rootNode->getChildByName("Credits"));
 	creditsButton->setTitleText("Credits");
@@ -108,6 +108,7 @@ void HelloWorld::update(float delta)
 	{
 		if (GameManager::sharedGameManager()->_died != true)
 		{
+			_player->update(delta);
 			if (visibleTarget->getOpacity() > 0)
 			{
 				visibleTarget->setOpacity(visibleTarget->getOpacity() - 3);
@@ -116,6 +117,7 @@ void HelloWorld::update(float delta)
 
 			for (int i = 0; i < 5; i++)
 			{
+				asteroids[i]->update(delta);
 				if (_player->asteroidCollision(*asteroids[i]->GetBoundingBox()))
 				{
 					GameManager::sharedGameManager()->_died = true;
@@ -168,7 +170,16 @@ void HelloWorld::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
 
 void HelloWorld::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event)
 {
-	
+	if (GameManager::sharedGameManager()->isGameLive == true)
+	{
+		if (GameManager::sharedGameManager()->_died != true)
+		{
+			_player->SetTrajectory(touch->getLocation());
+
+			visibleTarget->setPosition(touch->getLocation());
+			visibleTarget->setOpacity(255);
+		}
+	}
 }
 
 void HelloWorld::onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* event)
