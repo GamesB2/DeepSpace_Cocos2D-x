@@ -54,6 +54,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 // This function will be called when the app is inactive. When comes a phone call,it's be invoked too
 void AppDelegate::applicationDidEnterBackground() {
+
+	musicOnPause = CocosDenshion::SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying();
+
     Director::getInstance()->stopAnimation();
 
     // if you use SimpleAudioEngine, it must be pause
@@ -64,7 +67,11 @@ void AppDelegate::applicationDidEnterBackground() {
 void AppDelegate::applicationWillEnterForeground() {
     Director::getInstance()->startAnimation();
 
+	if (musicOnPause)
+	{
+		CocosDenshion::SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
+	}
     // if you use SimpleAudioEngine, it must resume here
-	CocosDenshion::SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
+	
 
 }

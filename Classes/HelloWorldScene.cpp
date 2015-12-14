@@ -11,6 +11,7 @@ USING_NS_CC;
 
 Asteroid* asteroids[5];
 game_player* _player;
+AstTimer* _timer;
 
 using namespace cocostudio::timeline;
 
@@ -93,6 +94,9 @@ bool HelloWorld::init()
 	creditsButton->setTitleText("Credits");
 
 	SetUpbuttons();
+
+	_timer = new AstTimer();
+	addChild(_timer);
 	
 	GameManager::sharedGameManager()->_died = false;
 	GameManager::sharedGameManager()->isGameLive = false;

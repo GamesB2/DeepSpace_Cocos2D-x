@@ -8,6 +8,7 @@
 #include "ui/CocosGUI.h"
 #include "Credits.h"
 #include "SimpleAudioEngine.h"
+#include "AstTimer.h"
 
 class HelloWorld : public cocos2d::Layer
 {

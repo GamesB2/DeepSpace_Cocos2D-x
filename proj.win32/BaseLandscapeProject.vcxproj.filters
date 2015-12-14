@@ -33,7 +33,7 @@
     <ClCompile Include="..\Classes\Credits.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Timer.cpp">
+    <ClCompile Include="..\Classes\AstTimer.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,7 +59,7 @@
     <ClInclude Include="..\Classes\Credits.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Timer.h">
+    <ClInclude Include="..\Classes\AstTimer.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

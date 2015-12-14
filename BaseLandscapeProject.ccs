@@ -12,6 +12,7 @@
         <Image Name="HelloWorld.png" />
         <Image Name="DeepSpace.png" />
         <Project Name="Credits.csd" Type="Scene" />
+        <Project Name="AstTimer.csd" Type="Node" />
       </RootFolder>
     </Group>
   </SolutionFolder>

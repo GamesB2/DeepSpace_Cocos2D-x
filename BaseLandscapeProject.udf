@@ -35,8 +35,9 @@
           <FilePathData Path="MainScene.csd" />
           <FilePathData Path="PlayerNode.csd" />
           <FilePathData Path="Credits.csd" />
+          <FilePathData Path="AstTimer.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="MainScene.csd" />
+        <ActiveDocument Path="AstTimer.csd" />
       </Value>
     </Item>
   </Properties>

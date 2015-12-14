@@ -4,20 +4,22 @@
 #include "ui/CocosGUI.h"
 #include "cocostudio\CocoStudio.h"
 
-class Timer : public cocos2d::Node
+class AstTimer : public cocos2d::Node
 {
 public:
-	Timer();
-	~Timer();
+	AstTimer();
+	~AstTimer();
 
-	Timer* create();
+	AstTimer* create();
 	virtual bool init() override;
 	virtual void update(float);
 
 private:
 	cocos2d::Label* _timerLabel;
 	cocos2d::Node*  _rootNode;
-	cocos2d::String _timeElapsed;
+	std::string _timeElapsed;
+	cocos2d::LabelBMFont
+
 
 	int seconds;
 	int minutes;

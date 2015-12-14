@@ -152,7 +152,7 @@ xcopy /Y /Q "$(COCOS_FRAMEWORKS)\cocos2d-x-3.8\prebuilt\win32\*.*" "$(OutDir)"
     <ClCompile Include="..\Classes\GameManager.cpp" />
     <ClCompile Include="..\Classes\game_player.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
-    <ClCompile Include="..\Classes\Timer.cpp" />
+    <ClCompile Include="..\Classes\AstTimer.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -162,7 +162,7 @@ xcopy /Y /Q "$(COCOS_FRAMEWORKS)\cocos2d-x-3.8\prebuilt\win32\*.*" "$(OutDir)"
     <ClInclude Include="..\Classes\GameManager.h" />
     <ClInclude Include="..\Classes\game_player.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
-    <ClInclude Include="..\Classes\Timer.h" />
+    <ClInclude Include="..\Classes\AstTimer.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>
