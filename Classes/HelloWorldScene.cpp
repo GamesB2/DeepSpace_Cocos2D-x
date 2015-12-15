@@ -70,6 +70,7 @@ bool HelloWorld::init()
 	//Preload Music
 	audio = CocosDenshion::SimpleAudioEngine::getInstance();
 	audio->preloadBackgroundMusic("DiscoCentury.wav");
+	audio->preloadEffect("sandyrb-thecrash.wav");
 
 	// Create a custom event listener
 	auto touchListener = EventListenerTouchOneByOne::create();
@@ -125,6 +126,7 @@ void HelloWorld::update(float delta)
 				if (_player->asteroidCollision(*asteroids[i]->GetBoundingBox()))
 				{
 					GameManager::sharedGameManager()->_died = true;
+					audio->playEffect("sandyrb-thecrash.wav");
 					SetUpbuttons();
 				}
 				for (int j = 0; j < 5; j++)
@@ -203,6 +205,8 @@ void HelloWorld::StartGame()
 void HelloWorld::SetUpbuttons()
 {
 	audio->pauseBackgroundMusic();
+
+	visibleTarget->setOpacity(0);
 	
 	Title->setVisible(true);
 
@@ -224,6 +228,7 @@ void HelloWorld::SetUpbuttons()
 			exitButton->setVisible(false);
 			creditsButton->setVisible(false);
 			_player->setVisible(true);
+			_timer->reset();
 			for (int i = 0; i < 5; i++)
 			{
 				asteroids[i]->setVisible(true);

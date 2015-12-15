@@ -13,13 +13,12 @@ public:
 	AstTimer* create();
 	virtual bool init() override;
 	virtual void update(float);
+	void reset();
 
 private:
 	cocos2d::Label* _timerLabel;
 	cocos2d::Node*  _rootNode;
 	std::string _timeElapsed;
-	cocos2d::LabelBMFont
-
 
 	int seconds;
 	int minutes;

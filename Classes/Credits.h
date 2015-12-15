@@ -15,6 +15,6 @@ public:
 	void SetUpTextboxes();
 	cocos2d::ui::Button*  backButton;
 	cocos2d::Node* rootNode;
-	cocos2d::Label* labels[7];
+	cocos2d::Label* labels[8];
 };
 

@@ -83,18 +83,29 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Backbutton" ActionTag="2018383672" Tag="20" IconVisible="False" LeftMargin="435.8228" RightMargin="478.1772" TopMargin="502.2520" BottomMargin="101.7480" TouchEnable="True" FontSize="14" ButtonText="Button" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="Backbutton" ActionTag="2018383672" Tag="20" IconVisible="False" LeftMargin="428.0019" RightMargin="485.9981" TopMargin="549.1816" BottomMargin="54.8184" TouchEnable="True" FontSize="14" ButtonText="Button" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="46.0000" Y="36.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="458.8228" Y="119.7480" />
+            <Position X="451.0019" Y="72.8184" />
             <Scale ScaleX="3.0826" ScaleY="2.1905" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.4779" Y="0.1871" />
+            <PrePosition X="0.4698" Y="0.1138" />
             <PreSize X="0.0000" Y="0.0000" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
             <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
             <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="Title8" ActionTag="473099002" Tag="24" IconVisible="False" LeftMargin="327.0651" RightMargin="372.9349" TopMargin="443.7932" BottomMargin="127.2068" FontSize="20" LabelText="Crash Sound Effect&#xA;freesound.org user ~ sandyrb&#xA;" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="260.0000" Y="69.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="457.0651" Y="161.7068" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.4761" Y="0.2527" />
+            <PreSize X="0.0000" Y="0.0000" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>

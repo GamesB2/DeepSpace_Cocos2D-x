@@ -36,13 +36,18 @@ bool AstTimer::init()
 	_rootNode = cocos2d::CSLoader::createNode("AstTimer.csb");
 	addChild(_rootNode);
 
-	_timerLabel = _rootNode->getChildByName<cocos2d::Label*>("AstTimer");
+
+	auto winsize = cocos2d::Director::getInstance()->getVisibleSize();
+	this->setPosition(0.0, 0.0);
+	this->setAnchorPoint(cocos2d::Vec2(winsize.width / 2, winsize.height / 2));
+
+	_timerLabel = cocos2d::Label::create("Time: ", "Arial", 30.0f);
 	addChild(_timerLabel);
 	_timerLabel->setVisible(false);
+	_timerLabel->setPosition((winsize.width / 10) * 9, (winsize.height / 10) * 9);
+	_timerLabel->setString("Time: 00:00");
 
 	this->schedule(schedule_selector(AstTimer::update), 1.0f);
-
-	_timerLabel->setString("00:00");
 
 	seconds = 0;
 	minutes = 0;
@@ -63,11 +68,17 @@ void AstTimer::update(float deltaTime)
 				seconds = 0;
 				minutes = minutes + 1;
 			}
-			sprintf(buffer, "%d:%d", minutes, seconds);
+			sprintf(buffer, "Time: %02d:%02d", minutes, seconds);
 			_timeElapsed = buffer;
 			_timerLabel->setString(_timeElapsed);
 		}
 	}
+}
+
+void AstTimer::reset()
+{
+	seconds = 0;
+	minutes = 0;
 }
 
 
