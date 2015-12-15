@@ -12,8 +12,12 @@ LOCAL_MODULE_FILENAME := libcocos2dcpp
 
 LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/AppDelegate.cpp \
-                   ../../Classes/HelloWorldScene.cpp
-
+                   ../../Classes/HelloWorldScene.cpp \
+				   ../../Classes/Asteroid.cpp \
+				   ../../Classes/AstTimer.cpp \
+				   ../../Classes/Credits.cpp \
+				   ../../Classes/game_player.cpp \
+				   ../../Classes/GameManager.cpp 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 
 # _COCOS_HEADER_ANDROID_BEGIN
