@@ -72,6 +72,10 @@ void AstTimer::update(float deltaTime)
 			_timeElapsed = buffer;
 			_timerLabel->setString(_timeElapsed);
 		}
+		else
+		{
+			_timerLabel->setVisible(false);
+		}
 	}
 }
 

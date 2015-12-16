@@ -201,6 +201,18 @@ void HelloWorld::StartGame()
 		asteroids[i]->Reset();
 	}
 	_player->reset();
+	Title->setVisible(false);
+	startButton->setVisible(false);
+	exitButton->setVisible(false);
+	creditsButton->setVisible(false);
+	_player->setVisible(true);
+	_timer->reset();
+	for (int i = 0; i < 5; i++)
+	{
+		asteroids[i]->setVisible(true);
+	}
+	GameManager::sharedGameManager()->isGameLive = true;
+	GameManager::sharedGameManager()->_died = false;
 }
 void HelloWorld::SetUpbuttons()
 {
@@ -223,19 +235,7 @@ void HelloWorld::SetUpbuttons()
 		switch (type)
 		{
 		case ui::Widget::TouchEventType::BEGAN:
-			Title->setVisible(false);
-			startButton->setVisible(false);
-			exitButton->setVisible(false);
-			creditsButton->setVisible(false);
-			_player->setVisible(true);
-			_timer->reset();
-			for (int i = 0; i < 5; i++)
-			{
-				asteroids[i]->setVisible(true);
-			}
 			StartGame();
-			GameManager::sharedGameManager()->isGameLive = true;
-			GameManager::sharedGameManager()->_died = false;
 			break;
 		case ui::Widget::TouchEventType::ENDED:
 			break;
